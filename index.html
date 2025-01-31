@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoLaunch - Documentation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+        }
+        nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 220px;
+            background-color: #222;
+            padding-top: 20px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            padding: 10px;
+            text-align: center;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+        nav ul li a:hover {
+            background-color: #444;
+        }
+        main {
+            margin-left: 240px;
+            padding: 20px;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        pre {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            max-width: 100%;
+            position: relative;
+        }
+        button.copy-btn {
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #222;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        #footer-content {
+            display: none;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            nav {
+                position: relative;
+                width: 100%;
+                height: auto;
+                text-align: center;
+            }
+            nav ul {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 10px;
+            }
+            main {
+                margin-left: 0;
+                padding: 15px;
+            }
+            pre {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>AutoLaunch</h1>
+        <p>Facilitez le lancement de vos applications Python depuis n'importe où.</p>
+        <a href="https://github.com/daneia/autolaunch" target="_blank">GitHub</a>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#installation">Installation</a></li>
+            <li><a href="#utilisation">Utilisation</a></li>
+            <li><a href="#exemples">Exemples</a></li>
+            <li><a href="#personnalisation">Personnalisation</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section id="installation">
+            <h2>Installation</h2>
+            <p>Installez AutoLaunch avec :</p>
+            <pre><code>pip install autolaunch</code><button class="copy-btn">📋</button></pre>
+        </section>
+        
+        <section id="utilisation">
+            <h2>Utilisation</h2>
+            <p>Ajoutez cette ligne dans votre script :</p>
+            <pre><code>import autolaunch
+autolaunch.ensure_registered()</code><button class="copy-btn">📋</button></pre>
+            <p>Puis exécutez votre script une première fois.</p>
+        </section>
+        
+        <section id="exemples">
+            <h2>Exemples</h2>
+            <p>Voici comment enregistrer un script et le lancer depuis n'importe où :</p>
+            <pre><code>python mon_script.py</code><button class="copy-btn">📋</button></pre>
+            <p>Puis simplement :</p>
+            <pre><code>mon_script</code><button class="copy-btn">📋</button></pre>
+        </section>
+        
+        <section id="personnalisation">
+            <h2>Personnalisation</h2>
+            <p>Définissez un nom personnalisé :</p>
+            <pre><code>autolaunch.register_app("nom_app", "C:\\chemin\\vers\\mon_script.py")</code><button class="copy-btn">📋</button></pre>
+        </section>
+        
+        <section id="faq">
+            <h2>FAQ</h2>
+            <p><strong>Comment désenregistrer une application ?</strong></p>
+            <pre><code>python mon_script.py --unregister</code><button class="copy-btn">📋</button></pre>
+        </section>
+    </main>
+    
+    <footer>
+        <button onclick="toggleFooter()">Mentions Légales</button>
+        <div id="footer-content">
+            <p><strong>Daneia</strong></p>
+            <p>Email : contact@daneia.fr</p>
+            <p>Hébergement : LWS - 10 rue Penthièvre, 75008 Paris</p>
+        </div>
+    </footer>
+    
+    <script>
+        function toggleFooter() {
+            var footerContent = document.getElementById("footer-content");
+            footerContent.style.display = (footerContent.style.display === "none" || footerContent.style.display === "") ? "block" : "none";
+        }
+        
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                var code = button.previousElementSibling.textContent;
+                navigator.clipboard.writeText(code.trim()).then(() => {
+                    alert("Code copié !");
+                }).catch(err => {
+                    console.error("Erreur lors de la copie", err);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
